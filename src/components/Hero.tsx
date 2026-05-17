@@ -17,8 +17,8 @@ export function Hero({ c, P }: { c: Theme; P: PortfolioData }) {
           className="hero-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(0, 1.05fr) minmax(0, 0.95fr)",
-            gap: 72,
+            gridTemplateColumns: "minmax(0, 0.95fr) minmax(0, 1.05fr)",
+            gap: 64,
             alignItems: "center",
           }}
         >

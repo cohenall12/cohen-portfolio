@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import type {
@@ -10,6 +10,80 @@ import type {
   TimelineEntry,
 } from "@/lib/data";
 import { Reveal, useReveal } from "./Reveal";
+
+function CopyEmail({ email, c }: { email: string; c: Theme }) {
+  const [copied, setCopied] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current);
+  }, []);
+
+  const onCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = email;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    setCopied(true);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), 1800);
+  };
+
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "baseline",
+        gap: 12,
+        marginBottom: 36,
+      }}
+    >
+      <a
+        href={"mailto:" + email}
+        onClick={onCopy}
+        aria-label={`Copy email ${email} to clipboard`}
+        className="mono"
+        style={{
+          display: "inline-block",
+          fontSize: 15,
+          color: c.ink,
+          letterSpacing: "-0.005em",
+          borderBottom: `1px solid ${c.hairStrong}`,
+          paddingBottom: 2,
+          cursor: "pointer",
+          transition: "border-color .2s ease",
+        }}
+      >
+        {email}
+      </a>
+      <span
+        className="mono"
+        aria-live="polite"
+        style={{
+          fontSize: 11,
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          color: c.softer,
+          opacity: copied ? 1 : 0,
+          transform: copied ? "translateY(0)" : "translateY(-2px)",
+          transition: "opacity .2s ease, transform .2s ease",
+        }}
+      >
+        Copied
+      </span>
+    </div>
+  );
+}
 
 function SectionHeader({
   c,
@@ -681,21 +755,7 @@ export function Contact({ c, P }: { c: Theme; P: PortfolioData }) {
           </p>
         </Reveal>
         <Reveal delay={170}>
-          <a
-            href={"mailto:" + P.email}
-            className="mono"
-            style={{
-              display: "inline-block",
-              fontSize: 15,
-              color: c.ink,
-              letterSpacing: "-0.005em",
-              borderBottom: `1px solid ${c.hairStrong}`,
-              paddingBottom: 2,
-              marginBottom: 36,
-            }}
-          >
-            {P.email}
-          </a>
+          <CopyEmail email={P.email} c={c} />
         </Reveal>
         <Reveal delay={200}>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
