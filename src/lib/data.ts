@@ -11,6 +11,7 @@ export type Project = {
   desc: string;
   details: string;
   image?: string;
+  repo?: string;
 };
 
 export type Pillar = { tag: string; line: string };
@@ -112,6 +113,7 @@ export const PORTFOLIO: PortfolioData = {
       desc: "A weight tracking app I built in around 10 days. It handles cases most trackers miss, like GLP-1 users, menstrual cycles, and thyroid conditions.",
       details: "Built end to end in about 10 days. React Native and Expo on the front, Supabase Postgres on the back with row level security, login, onboarding, a tab-based main app, and a personalized insights layer. Runs on iOS and Android through Expo Go. I made every product and architecture call and Claude Code wrote most of the actual code under my direction. The interesting bit was the insights layer. Most weight apps assume down is good and up is bad, which falls apart for anyone on GLP-1s, with a thyroid condition, or whose weight tracks their cycle. I went with plain rules instead of an LLM so the logic stays explainable and costs nothing to run.",
       image: "/images/scalemate.jpg",
+      repo: "https://github.com/cohenall12/scalemate-showcase",
     },
     {
       id: "ladder",
@@ -122,6 +124,7 @@ export const PORTFOLIO: PortfolioData = {
       desc: "An AI career tool built at the Entre SaaSathon. It ranks live internship and graduate roles against your CV, syncs Gmail into a Kanban tracker, and runs voice driven interview prep.",
       details: "Built over a weekend at the Entre SaaSathon in a team environment with complete version control. Ladder scans a CV, ranks live internship and graduate roles against it, explains why each role fits, syncs Gmail to turn application emails into a Kanban tracker, and runs voice driven interview prep that gets graded on the fly. The interesting work was figuring out where AI actually earned its place. We did not want it to just be 'chat with your applications'. The useful version turned out to be four narrow jobs with clear inputs and outputs. Parse a CV. Compare to listings. Classify emails. Generate company specific prep. Built on Next.js, Supabase, OpenRouter, and Gmail OAuth. Biggest lesson was that scope beats feature count. The product got better every time we made the demo path simpler.",
       image: "/images/ladder.png",
+      repo: "https://github.com/cohenall12/ladder",
     },
     {
       id: "step-counter",

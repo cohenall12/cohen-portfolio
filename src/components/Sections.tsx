@@ -390,16 +390,44 @@ function KanbanCard({
                   {p.details}
                 </div>
                 <div
-                  className="mono"
                   style={{
-                    fontSize: 10.5,
-                    color: c.softer,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 14,
                     marginTop: 14,
-                    letterSpacing: "0.10em",
-                    textTransform: "uppercase",
+                    flexWrap: "wrap",
                   }}
                 >
-                  {p.type}
+                  <span
+                    className="mono"
+                    style={{
+                      fontSize: 10.5,
+                      color: c.softer,
+                      letterSpacing: "0.10em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {p.type}
+                  </span>
+                  {p.repo && (
+                    <a
+                      href={p.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="mono"
+                      style={{
+                        fontSize: 10.5,
+                        color: c.ink,
+                        letterSpacing: "0.10em",
+                        textTransform: "uppercase",
+                        borderBottom: `1px solid ${c.hairStrong}`,
+                        paddingBottom: 1,
+                      }}
+                    >
+                      View on GitHub ↗
+                    </a>
+                  )}
                 </div>
               </div>
               <div
@@ -646,28 +674,50 @@ export function Contact({ c, P }: { c: Theme; P: PortfolioData }) {
               fontSize: 19,
               lineHeight: 1.55,
               color: c.muted,
-              marginBottom: 40,
+              marginBottom: 28,
             }}
           >
             {P.contact.body}
           </p>
         </Reveal>
+        <Reveal delay={170}>
+          <a
+            href={"mailto:" + P.email}
+            className="mono"
+            style={{
+              display: "inline-block",
+              fontSize: 15,
+              color: c.ink,
+              letterSpacing: "-0.005em",
+              borderBottom: `1px solid ${c.hairStrong}`,
+              paddingBottom: 2,
+              marginBottom: 36,
+            }}
+          >
+            {P.email}
+          </a>
+        </Reveal>
         <Reveal delay={200}>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            {P.contact.actions.map((a, i) => (
-              <a
-                key={i}
-                href={a.href}
-                className={"btn " + (a.primary ? "btn-primary" : "btn-ghost")}
-              >
-                {a.label}
-                {a.primary && (
-                  <span className="arr-r" aria-hidden>
-                    →
-                  </span>
-                )}
-              </a>
-            ))}
+            {P.contact.actions.map((a, i) => {
+              const isExternal = a.href.startsWith("http");
+              return (
+                <a
+                  key={i}
+                  href={a.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className={"btn " + (a.primary ? "btn-primary" : "btn-ghost")}
+                >
+                  {a.label}
+                  {a.primary && (
+                    <span className="arr-r" aria-hidden>
+                      →
+                    </span>
+                  )}
+                </a>
+              );
+            })}
           </div>
         </Reveal>
       </div>

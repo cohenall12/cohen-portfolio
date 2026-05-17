@@ -1,3 +1,5 @@
+@/Users/cohen/Workspaces/Cohen-AI/Company-OS/AIOS/references/gotchas/vercel.md
+
 # Cohen Allingham — Personal Portfolio (CLAUDE.md)
 
 > Repo-level guide for Claude Code. Loaded at the start of every session in this directory.
@@ -90,3 +92,12 @@ These live in [src/lib/data.ts](src/lib/data.ts) and need real values before thi
 - Short responses unless complexity warrants detail.
 - Don't change content data without confirming with Cohen — the portfolio data is the source of truth Cohen approved in the Claude Design tool.
 - Match existing code style (inline styles + scoped CSS-in-string). Don't refactor away the design's structural choices unless asked.
+
+## Deploy preflight (Vercel)
+
+Run through this before any `vercel deploy` or push to a deploy-tracked branch. Each item is here because it bit a past deploy.
+
+1. **`package.json` `name` is lowercase-kebab-case.** No capitals, no spaces, no underscores. `create-next-app` will reject capitals; Vercel will surface a less-obvious error if you sneak past it.
+2. **Vercel project framework preset is explicitly `nextjs`.** Auto-detect has misfired before, leading to 404s on the deployed URL. Confirm in the Vercel dashboard → Project Settings → General → Framework Preset, or via `vercel project inspect`.
+3. **Hobby plan privacy / deployment protection flag is correct.** If the project is on the hobby tier, deployment protection defaults to "Standard" which gates the URL behind a Vercel SSO wall (returns 401). For public portfolio / demo URLs, set protection to "Only Preview Deployments" or "Disabled" under Project Settings → Deployment Protection.
+4. **Required env vars are present in the right environment** (production / preview / development). `vercel env ls` to check. Missing env vars produce a successful build that 500s at runtime.

@@ -9,10 +9,29 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = "https://cohenall.com";
+const TITLE = "Cohen Allingham · Mechatronics + AI systems";
+const DESCRIPTION =
+  "University of Canterbury mechatronics student building practical AI automations, web app prototypes, and engineering projects.";
+
 export const metadata: Metadata = {
-  title: "Cohen Allingham · Mechatronics + AI systems",
-  description:
-    "University of Canterbury mechatronics student building practical AI automations, web app prototypes, and engineering projects.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  authors: [{ name: "Cohen Allingham" }],
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "Cohen Allingham",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
