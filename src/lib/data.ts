@@ -58,7 +58,7 @@ export const PORTFOLIO: PortfolioData = {
   email: "cohen.allingham@gmail.com",
   github: "github.com/cohenall12",
   linkedin: "linkedin.com/in/cohenallingham",
-  cvHref: "#",
+  cvHref: "/cohen-allingham-cv.pdf",
 
   hero: {
     eyebrow: "Cohen Allingham",
@@ -66,7 +66,7 @@ export const PORTFOLIO: PortfolioData = {
     sub: "I build useful systems. Automations, prototypes, and the embedded work behind them. Mostly I'm just curious about how things fit together.",
     primaryCta: { label: "Contact me", href: "#contact" },
     secondaryCta: { label: "View projects", href: "#work" },
-    tertiaryCta: { label: "Download CV", href: "#" },
+    tertiaryCta: { label: "Download CV", href: "/cohen-allingham-cv.pdf" },
   },
 
   terminalLines: [
@@ -220,7 +220,7 @@ export const PORTFOLIO: PortfolioData = {
       { label: "Email", href: "mailto:cohen.allingham@gmail.com", primary: true },
       { label: "LinkedIn", href: "https://linkedin.com/in/cohenallingham" },
       { label: "GitHub", href: "https://github.com/cohenall12" },
-      { label: "Download CV", href: "#" },
+      { label: "Download CV", href: "/cohen-allingham-cv.pdf" },
     ],
   },
 };
