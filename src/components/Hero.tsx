@@ -108,6 +108,8 @@ export function Hero({ c, P }: { c: Theme; P: PortfolioData }) {
                 </a>
                 <a
                   href={P.hero.tertiaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-text"
                   style={{
                     marginLeft: 6,

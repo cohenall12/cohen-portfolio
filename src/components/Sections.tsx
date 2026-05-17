@@ -822,7 +822,7 @@ export function Contact({ c, P }: { c: Theme; P: PortfolioData }) {
                   />
                 );
               }
-              const isExternal = a.href.startsWith("http");
+              const isExternal = a.href.startsWith("http") || a.href.endsWith(".pdf");
               return (
                 <a
                   key={i}
