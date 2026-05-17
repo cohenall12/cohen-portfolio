@@ -11,21 +11,23 @@ import type {
 } from "@/lib/data";
 import { Reveal, useReveal } from "./Reveal";
 
-function CopyEmail({ email, c }: { email: string; c: Theme }) {
+function useCopyFeedback(): readonly [boolean, (text: string) => Promise<void>] {
   const [copied, setCopied] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    []
+  );
 
-  const onCopy = async (e: React.MouseEvent) => {
-    e.preventDefault();
+  const copy = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(email);
+      await navigator.clipboard.writeText(text);
     } catch {
       const ta = document.createElement("textarea");
-      ta.value = email;
+      ta.value = text;
       ta.setAttribute("readonly", "");
       ta.style.position = "fixed";
       ta.style.opacity = "0";
@@ -39,6 +41,12 @@ function CopyEmail({ email, c }: { email: string; c: Theme }) {
     timer.current = setTimeout(() => setCopied(false), 1800);
   };
 
+  return [copied, copy] as const;
+}
+
+function CopyEmail({ email, c }: { email: string; c: Theme }) {
+  const [copied, copy] = useCopyFeedback();
+
   return (
     <div
       style={{
@@ -50,7 +58,10 @@ function CopyEmail({ email, c }: { email: string; c: Theme }) {
     >
       <a
         href={"mailto:" + email}
-        onClick={onCopy}
+        onClick={(e) => {
+          e.preventDefault();
+          copy(email);
+        }}
         aria-label={`Copy email ${email} to clipboard`}
         className="mono"
         style={{
@@ -82,6 +93,46 @@ function CopyEmail({ email, c }: { email: string; c: Theme }) {
         Copied
       </span>
     </div>
+  );
+}
+
+function EmailButton({
+  href,
+  email,
+  label,
+  primary,
+}: {
+  href: string;
+  email: string;
+  label: string;
+  primary?: boolean;
+}) {
+  const [copied, copy] = useCopyFeedback();
+  return (
+    <a
+      href={href}
+      onClick={(e) => {
+        e.preventDefault();
+        copy(email);
+      }}
+      aria-label={`Copy email ${email} to clipboard`}
+      className={"btn " + (primary ? "btn-primary" : "btn-ghost")}
+    >
+      <span
+        style={{
+          display: "inline-block",
+          minWidth: 52,
+          textAlign: "center",
+        }}
+      >
+        {copied ? "Copied" : label}
+      </span>
+      {!copied && primary && (
+        <span className="arr-r" aria-hidden>
+          →
+        </span>
+      )}
+    </a>
   );
 }
 
@@ -760,6 +811,17 @@ export function Contact({ c, P }: { c: Theme; P: PortfolioData }) {
         <Reveal delay={200}>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             {P.contact.actions.map((a, i) => {
+              if (a.href.startsWith("mailto:")) {
+                return (
+                  <EmailButton
+                    key={i}
+                    href={a.href}
+                    email={P.email}
+                    label={a.label}
+                    primary={a.primary}
+                  />
+                );
+              }
               const isExternal = a.href.startsWith("http");
               return (
                 <a
