@@ -42,3 +42,6 @@ next-env.d.ts
 
 # design handoff bundle (reference only, 22MB — see CLAUDE.md)
 _design_bundle/
+
+# claude code session-local state
+.claude/
