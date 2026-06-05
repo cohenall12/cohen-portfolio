@@ -74,7 +74,7 @@ These live in [src/lib/data.ts](src/lib/data.ts) and need real values before thi
 
 ## What lives outside this repo
 
-- **Project context + brand voice:** Obsidian vault at `/Users/cohen/Workspaces/Vault/Areas/Cohen/_context/` (auto-loaded into every Claude session via global CLAUDE.md). Voice guide: `voice.md`. Bio: `me.md` / `about-me.md`.
+- **Project context + brand voice:** Obsidian vault at `/Users/cohen/Workspaces/Vault/Areas/cohen/_context/` (auto-loaded into every Claude session via global CLAUDE.md). Voice guide: `voice.md`. Bio: `me.md` / `about-me.md`.
 - **Master CV:** `/Users/cohen/Workspaces/Cohen-AI/Personal/University/Internships/Documents/00-Current/CV/Cohen-Allingham-master-CV.md`
 - **University coursework:** `/Users/cohen/Workspaces/Cohen-AI/Personal/University/Courses/` (ENCE361, ENMT301, ENEL373, etc.)
 - **AIOS (separate ecosystem):** `/Users/cohen/Workspaces/Cohen-AI/Company-OS/AIOS/`
