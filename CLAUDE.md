@@ -1,4 +1,4 @@
-@/Users/cohen/Workspaces/Cohen-AI/Company-OS/AIOS/references/gotchas/vercel.md
+@/Users/cohen/Workspaces/OS/.claude/references/gotchas/vercel.md
 
 # Cohen Allingham — Personal Portfolio (CLAUDE.md)
 
@@ -75,14 +75,14 @@ These live in [src/lib/data.ts](src/lib/data.ts) and need real values before thi
 ## What lives outside this repo
 
 - **Project context + brand voice:** Obsidian vault at `/Users/cohen/Workspaces/Vault/Areas/cohen/_context/` (auto-loaded into every Claude session via global CLAUDE.md). Voice guide: `voice.md`. Bio: `me.md` / `about-me.md`.
-- **Master CV:** `/Users/cohen/Workspaces/Cohen-AI/Personal/University/Internships/Documents/00-Current/CV/Cohen-Allingham-master-CV.md`
-- **University coursework:** `/Users/cohen/Workspaces/Cohen-AI/Personal/University/Courses/` (ENCE361, ENMT301, ENEL373, etc.)
-- **AIOS (separate ecosystem):** `/Users/cohen/Workspaces/Cohen-AI/Company-OS/AIOS/`
+- **Master CV:** `/Users/cohen/Workspaces/OS/personal/university/Internships/Documents/00-Current/CV/Cohen-Allingham-master-CV.md`
+- **University coursework:** `/Users/cohen/Workspaces/OS/personal/university/Courses/` (ENCE361, ENMT301, ENEL373, etc.)
+- **AIOS (separate ecosystem):** `/Users/cohen/Workspaces/OS/.claude/`
 - **Design source:** `_design_bundle/` inside this repo (Claude Design handoff with chat transcripts).
 
 ## What this site is NOT
 
-- Not the Cohen-AI business/agency site (separate future project at `Cohen-AI/Business/Website/`).
+- Not the True Delta company/agency site — that already exists as a separate project at `/Users/cohen/Workspaces/OS/truedelta/site/`.
 - Not a blog, not e-commerce, no auth, no analytics beyond Vercel defaults.
 - Not yet wired to Notion as a CMS — content is hardcoded in `src/lib/data.ts`.
 
